@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Proyecto 2</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <h1>Practica DWI</h1>
+
+  <p>
+    <a href="index.html">Inicio</a> |
+    <a href="proyecto1.html">Proyecto 1</a> |
+    <a href="proyecto2.html">Proyecto 2</a> |
+    <a href="proyecto3.html">Proyecto 3</a>
+  </p>
+
+  <hr>
+
+  <h2>Proyecto 2 - Convertidor de temperatura</h2>
+
+  <form id="form-temp">
+    <p>
+      Valor:
+      <input type="number" id="valor" name="valor">
+    </p>
+
+    <p>
+      De:
+      <select id="origen" name="origen">
+        <option value="">Seleccionar</option>
+        <option value="celsius">Celsius</option>
+        <option value="fahrenheit">Fahrenheit</option>
+        <option value="kelvin">Kelvin</option>
+      </select>
+    </p>
+
+    <p>
+      A:
+      <select id="destino" name="destino">
+        <option value="">Seleccionar</option>
+        <option value="celsius">Celsius</option>
+        <option value="fahrenheit">Fahrenheit</option>
+        <option value="kelvin">Kelvin</option>
+      </select>
+    </p>
+
+    <p><button type="button" id="btn-convertir" disabled>Convertir</button></p>
+  </form>
+
+  <h3>Resultado</h3>
+  <p id="resultado-temp">Aqui se muestra el resultado de la conversion.</p>
+
+  <script>
+    var valor = document.getElementById("valor");
+    var origen = document.getElementById("origen");
+    var destino = document.getElementById("destino");
+    var btn = document.getElementById("btn-convertir");
+    var resultado = document.getElementById("resultado-temp");
+
+    function revisarCampos() {
+      var listo = valor.value !== "" && origen.value !== "" && destino.value !== "";
+      btn.disabled = !listo;
+    }
+
+    valor.addEventListener("input", revisarCampos);
+    origen.addEventListener("change", revisarCampos);
+    destino.addEventListener("change", revisarCampos);
+
+    function aCelsius(num, unidad) {
+      if (unidad === "celsius") return num;
+      if (unidad === "fahrenheit") return (num - 32) * 5 / 9;
+      if (unidad === "kelvin") return num - 273.15;
+    }
+
+    function desdeCelsius(celsius, unidad) {
+      if (unidad === "celsius") return celsius;
+      if (unidad === "fahrenheit") return celsius * 9 / 5 + 32;
+      if (unidad === "kelvin") return celsius + 273.15;
+    }
+
+    var nombres = {
+      celsius: "Celsius",
+      fahrenheit: "Fahrenheit",
+      kelvin: "Kelvin"
+    };
+
+    btn.addEventListener("click", function () {
+      var num = parseFloat(valor.value);
+      var celsius = aCelsius(num, origen.value);
+      var final = desdeCelsius(celsius, destino.value);
+
+      resultado.textContent = num + " " + nombres[origen.value] + " = " +
+        final.toFixed(2) + " " + nombres[destino.value];
+    });
+  </script>
+</body>
+</html>

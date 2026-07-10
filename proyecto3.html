@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Proyecto 3</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <h1>Practica DWI</h1>
+
+  <p>
+    <a href="index.html">Inicio</a> |
+    <a href="proyecto1.html">Proyecto 1</a> |
+    <a href="proyecto2.html">Proyecto 2</a> |
+    <a href="proyecto3.html">Proyecto 3</a>
+  </p>
+
+  <hr>
+
+  <h2>Proyecto 3 - Lista de tareas</h2>
+
+  <form id="form-tareas">
+    <p>
+      Nueva tarea:
+      <input type="text" id="texto-tarea" name="tarea">
+      <input type="submit" value="Agregar">
+    </p>
+  </form>
+
+  <h3>Lista de tareas</h3>
+  <ul id="lista-tareas"></ul>
+  <p id="sin-tareas">No hay tareas.</p>
+
+  <script>
+    var tareas = [];
+    var id = 1;
+
+    var form = document.getElementById("form-tareas");
+    var input = document.getElementById("texto-tarea");
+    var lista = document.getElementById("lista-tareas");
+    var sinTareas = document.getElementById("sin-tareas");
+
+    function renderTasks() {
+      lista.innerHTML = "";
+
+      var pendientes = [];
+      var completadas = [];
+
+      for (var i = 0; i < tareas.length; i++) {
+        if (tareas[i].completada) {
+          completadas.push(tareas[i]);
+        } else {
+          pendientes.push(tareas[i]);
+        }
+      }
+
+      var ordenadas = pendientes.concat(completadas);
+      sinTareas.style.display = ordenadas.length === 0 ? "block" : "none";
+
+      for (var j = 0; j < ordenadas.length; j++) {
+        (function (tarea) {
+          var li = document.createElement("li");
+          if (tarea.completada) {
+            li.className = "completada";
+          }
+
+          var check = document.createElement("input");
+          check.type = "checkbox";
+          check.checked = tarea.completada;
+
+          var texto = document.createTextNode(" " + tarea.descripcion + " ");
+
+          var btn = document.createElement("button");
+          btn.textContent = "Eliminar";
+
+          check.addEventListener("change", function () {
+            tarea.completada = check.checked;
+            renderTasks();
+          });
+
+          btn.addEventListener("click", function () {
+            for (var k = 0; k < tareas.length; k++) {
+              if (tareas[k].id === tarea.id) {
+                tareas.splice(k, 1);
+                break;
+              }
+            }
+            renderTasks();
+          });
+
+          li.appendChild(check);
+          li.appendChild(texto);
+          li.appendChild(btn);
+          lista.appendChild(li);
+        })(ordenadas[j]);
+      }
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var texto = input.value.trim();
+      if (texto === "") return;
+
+      tareas.push({
+        id: id++,
+        descripcion: texto,
+        completada: false
+      });
+
+      input.value = "";
+      renderTasks();
+    });
+
+    renderTasks();
+  </script>
+</body>
+</html>

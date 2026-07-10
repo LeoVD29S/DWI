@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Proyecto 1</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <h1>Practica DWI</h1>
+
+  <p>
+    <a href="index.html">Inicio</a> |
+    <a href="proyecto1.html">Proyecto 1</a> |
+    <a href="proyecto2.html">Proyecto 2</a> |
+    <a href="proyecto3.html">Proyecto 3</a>
+  </p>
+
+  <hr>
+
+  <h2>Proyecto 1 - Tiempo desde el nacimiento</h2>
+
+  <form id="form-edad">
+    <p>
+      Dia:
+      <select id="dia" name="dia"></select>
+    </p>
+
+    <p>
+      Mes:
+      <select id="mes" name="mes"></select>
+    </p>
+
+    <p>
+      Anio:
+      <select id="anio" name="anio"></select>
+    </p>
+
+    <p id="error-edad" class="error"></p>
+    <p><input type="submit" value="Calcular"></p>
+  </form>
+
+  <h3>Resultado</h3>
+  <p id="resultado-edad">Aqui se muestra el tiempo en anos y meses.</p>
+
+  <script>
+    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                 "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+    var selectDia = document.getElementById("dia");
+    var selectMes = document.getElementById("mes");
+    var selectAnio = document.getElementById("anio");
+    var form = document.getElementById("form-edad");
+    var error = document.getElementById("error-edad");
+    var resultado = document.getElementById("resultado-edad");
+
+    for (var d = 1; d <= 31; d++) {
+      var optDia = document.createElement("option");
+      optDia.value = d;
+      optDia.textContent = d;
+      selectDia.appendChild(optDia);
+    }
+
+    for (var m = 0; m < 12; m++) {
+      var optMes = document.createElement("option");
+      optMes.value = m + 1;
+      optMes.textContent = meses[m];
+      selectMes.appendChild(optMes);
+    }
+
+    var anioActual = new Date().getFullYear();
+    for (var a = anioActual; a >= anioActual - 100; a--) {
+      var optAnio = document.createElement("option");
+      optAnio.value = a;
+      optAnio.textContent = a;
+      selectAnio.appendChild(optAnio);
+    }
+
+    function diasDelMes(mes, anio) {
+      if (mes === 2) {
+        var bisiesto = (anio % 4 === 0 && anio % 100 !== 0) || (anio % 400 === 0);
+        return bisiesto ? 29 : 28;
+      }
+      if (mes === 4 || mes === 6 || mes === 9 || mes === 11) return 30;
+      return 31;
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      error.textContent = "";
+
+      var dia = parseInt(selectDia.value);
+      var mes = parseInt(selectMes.value);
+      var anio = parseInt(selectAnio.value);
+      var maxDias = diasDelMes(mes, anio);
+
+      if (dia < 1 || dia > maxDias) {
+        error.textContent = "La fecha no es valida.";
+        return;
+      }
+
+      var nacimiento = new Date(anio, mes - 1, dia);
+      var hoy = new Date();
+
+      if (nacimiento > hoy) {
+        error.textContent = "La fecha no puede ser futura.";
+        return;
+      }
+
+      var anos = hoy.getFullYear() - nacimiento.getFullYear();
+      var mesesTrans = hoy.getMonth() - nacimiento.getMonth();
+
+      if (hoy.getDate() < nacimiento.getDate()) {
+        mesesTrans--;
+      }
+      if (mesesTrans < 0) {
+        anos--;
+        mesesTrans += 12;
+      }
+
+      resultado.textContent = "Han pasado " + anos + " anos y " + mesesTrans + " meses.";
+    });
+  </script>
+</body>
+</html>

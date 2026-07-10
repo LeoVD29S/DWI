@@ -2,141 +2,28 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Práctica DWI — Portal de Herramientas</title>
+  <title>Practica DWI</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <h1 class="logo">Práctica DWI</h1>
-      <nav class="main-nav" aria-label="Navegación principal">
-        <ul class="nav-list">
-          <li><button type="button" class="nav-btn active" data-section="proyecto1">Calcular Edad</button></li>
-          <li><button type="button" class="nav-btn" data-section="proyecto2">Calcular Temperatura</button></li>
-          <li><button type="button" class="nav-btn" data-section="proyecto3">Gestión Actividades</button></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
-  <main class="container main-content">
-    <!--  Calculadora de edad -->
-    <section id="proyecto1" class="project-section active" aria-labelledby="titulo-proyecto1">
-      <header class="section-header">
-        <h2 id="titulo-proyecto1">Tiempo desde el nacimiento</h2>
-        <p>Ingresa tu fecha de nacimiento con el selector personalizado y calcula cuántos años y meses han transcurrido.</p>
-      </header>
+  <h1>Practica DWI</h1>
 
-      <form id="form-nacimiento" class="card form-card" novalidate>
-        <fieldset class="date-picker">
-          <legend>Fecha de nacimiento</legend>
-          <div class="date-fields">
-            <div class="field-group">
-              <label for="dia-nacimiento">Día</label>
-              <select id="dia-nacimiento" name="dia" required>
-                <option value="">—</option>
-              </select>
-            </div>
-            <div class="field-group">
-              <label for="mes-nacimiento">Mes</label>
-              <select id="mes-nacimiento" name="mes" required>
-                <option value="">—</option>
-              </select>
-            </div>
-            <div class="field-group">
-              <label for="anio-nacimiento">Año</label>
-              <select id="anio-nacimiento" name="anio" required>
-                <option value="">—</option>
-              </select>
-            </div>
-          </div>
-        </fieldset>
-        <p id="error-nacimiento" class="form-message error" role="alert" hidden></p>
-        <button type="submit" class="btn btn-primary">Calcular tiempo transcurrido</button>
-      </form>
+  <p>
+    <a href="index.html">Inicio</a> |
+    <a href="proyecto1.html">Proyecto 1</a> |
+    <a href="proyecto2.html">Proyecto 2</a> |
+    <a href="proyecto3.html">Proyecto 3</a>
+  </p>
 
-      <div id="resultado-nacimiento" class="card result-card" hidden>
-        <h3>Resultado</h3>
-        <p id="texto-resultado-nacimiento"></p>
-      </div>
-    </section>
+  <hr>
 
-    <!--  Convertidor térmico -->
-    <section id="proyecto2" class="project-section" aria-labelledby="titulo-proyecto2" hidden>
-      <header class="section-header">
-        <h2 id="titulo-proyecto2">Convertidor de unidades térmicas</h2>
-        <p>Convierte entre Celsius, Fahrenheit y Kelvin. El botón se habilita al completar todos los campos.</p>
-      </header>
+  <h2>Inicio</h2>
+  <p>Elige un proyecto:</p>
 
-      <form id="form-temperatura" class="card form-card">
-        <div class="field-group">
-          <label for="valor-temperatura">Valor numérico</label>
-          <input type="number" id="valor-temperatura" name="valor" step="any" placeholder="Ej. 25">
-        </div>
-        <div class="field-row">
-          <div class="field-group">
-            <label for="unidad-origen">Unidad de origen</label>
-            <select id="unidad-origen" name="origen">
-              <option value="">Seleccionar…</option>
-              <option value="celsius">Celsius (°C)</option>
-              <option value="fahrenheit">Fahrenheit (°F)</option>
-              <option value="kelvin">Kelvin (K)</option>
-            </select>
-          </div>
-          <div class="field-group">
-            <label for="unidad-destino">Unidad de destino</label>
-            <select id="unidad-destino" name="destino">
-              <option value="">Seleccionar…</option>
-              <option value="celsius">Celsius (°C)</option>
-              <option value="fahrenheit">Fahrenheit (°F)</option>
-              <option value="kelvin">Kelvin (K)</option>
-            </select>
-          </div>
-        </div>
-        <button type="button" id="btn-convertir" class="btn btn-primary" disabled>Convertir</button>
-      </form>
+  <p><a href="proyecto1.html">Proyecto 1 - Calcular edad</a></p>
+  <p><a href="proyecto2.html">Proyecto 2 - Convertir temperatura</a></p>
+  <p><a href="proyecto3.html">Proyecto 3 - Lista de tareas</a></p>
 
-      <div id="resultado-temperatura" class="card result-card" hidden>
-        <h3>Resultado</h3>
-        <p id="texto-resultado-temperatura"></p>
-      </div>
-    </section>
-
-    <!--  Gestor de tareas -->
-    <section id="proyecto3" class="project-section" aria-labelledby="titulo-proyecto3" hidden>
-      <header class="section-header">
-        <h2 id="titulo-proyecto3">Gestión de actividades diarias</h2>
-        <p>Agrega, completa, desmarca y elimina tareas. Las pendientes aparecen primero; las completadas al final.</p>
-      </header>
-
-      <form id="form-tareas" class="card form-card task-form">
-        <div class="field-group task-input-group">
-          <label for="descripcion-tarea">Nueva tarea</label>
-          <div class="task-add-row">
-            <input type="text" id="descripcion-tarea" name="descripcion" placeholder="Describe la actividad…" maxlength="200">
-            <button type="submit" class="btn btn-primary">Agregar</button>
-          </div>
-        </div>
-      </form>
-
-      <div class="card">
-        <h3 class="tasks-title">Lista de tareas</h3>
-        <ul id="lista-tareas" class="task-list" aria-live="polite"></ul>
-        <p id="lista-vacia" class="empty-state">No hay tareas registradas. Agrega una para comenzar.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p></p>
-    </div>
-  </footer>
-
-  <script src="js/navigation.js"></script>
-  <script src="js/age-calculator.js"></script>
-  <script src="js/temperature-converter.js"></script>
-  <script src="js/task-manager.js"></script>
 </body>
 </html>
