@@ -1,0 +1,51 @@
+Practica de laboratorio DWI
+El objetivo de esta actividad es desarrollar una aplicación web responsiva que integre tres herramientas 
+interactivas basadas en JavaScript dinámico. Deberás crear una página principal personalizada que sirva 
+como portal central para acceder a cada uno de los proyectos.
+Requisitos de la Interfaz y Navegación
+• Diseño Responsivo: Toda la aplicación debe contar con estilos CSS sencillos, visualmente 
+atractivos y adaptables a diferentes dispositivos (móviles, tabletas y escritorio). 
+• Estructura de Navegación: La página principal debe incluir un menú de navegación. Tienes dos 
+opciones para estructurar la visualización de los ejercicios:
+1. Navegación Multipágina: El menú redirige al usuario a una página independiente para 
+cada uno de los tres ejercicios.
+2. Vista Única (SPA): Los tres ejercicios se visualizan en la misma página principal, 
+permitiendo al usuario alternar entre ellos dinámicamente desde el menú.
+Al finalizar deberás:
+1. Adjuntar en Classroom el repositorio terminado en GitHub. (link)
+2. Adjuntar el link de la página web desplegada en GitHub.
+Proyecto de clase No. 1
+Desarrolle una herramienta que calcule el tiempo transcurrido desde el nacimiento del usuario:
+• Selector de fecha personalizado: Implemente un formulario con un selector de fechas 
+desarrollado mediante JavaScript, evitando el uso del componente interactivo input 
+type="date" nativo de HTML5. 
+• Validación de datos: Aplique una validación básica para garantizar que la fecha ingresada sea 
+válida y coherente. 
+• Despliegue de resultados: Muestre de forma clara el resultado del cálculo (en años y meses) 
+en la misma sección tras enviar el formulario. 
+Proyecto de clase No. 2
+Desarrolle un convertidor de unidades térmicas que evalúe las entradas del usuario de forma 
+condicional: 
+• Control de estados: El botón "Convertir" debe permanecer estrictamente deshabilitado hasta 
+que el usuario haya completado los tres campos obligatorios: valor numérico, unidad de 
+origen y unidad de destino. 
+• Unidades soportadas: Celsius, Fahrenheit y Kelvin. 
+• Procesamiento: Al activarse el botón, calcule y muestre el resultado de la conversión 
+inmediatamente debajo del formulario. 
+Proyecto de clase No. 3
+Diseñe un sistema interactivo para la gestión de actividades diarias utilizando manipulación 
+dinámica del DOM: 
+• Estructura de datos interna: Almacene las tareas en un arreglo de objetos de JavaScript 
+([ { descripcion: "", completada: false } ]). Cada operación de alta, baja o modificación 
+debe actualizar este arreglo de manera inmediata. 
+• Renderizado modular: Implemente una función dedicada (ej. renderTasks()) encargada 
+de limpiar el contenedor del DOM y reconstruir la lista visual basándose en el estado 
+actualizado del arreglo. 
+• Comportamiento de la lista:
+o Las tareas pendientes se muestran al inicio de la lista. 
+o Al marcar una tarea como completada, se le debe aplicar un estilo de texto 
+tachado y reubicarla automáticamente al final de la lista. 
+o El usuario debe poder desmarcar una tarea completada para devolverla al bloque 
+de pendientes. 
+o Debe incluirse un botón funcional para eliminar permanentemente una tarea 
+seleccionada. 
